@@ -28,7 +28,7 @@ func (s *NumberGuessingGame) Play() {
 		fmt.Println("*************************************************************")
 		chances := difficultyWithChancesMap[enums.Difficulty(getDifficulty())]
 		randomNumber := getRandomNumber()
-		fmt.Printf("Random Number: %d\n", randomNumber)
+
 		isWin, attempts := guessGame(chances, randomNumber)
 		if isWin {
 			timeGuessNumber = time.Now()
@@ -87,9 +87,10 @@ func guessGame(chances, randomNumber int) (bool, int) {
 		}
 
 		if number == randomNumber {
-			return true, i
+			return true, i + 1
 		} else {
 			fmt.Printf("Wrong answer!!")
+			hintProvide(randomNumber, number)
 		}
 	}
 	return false, chances
@@ -114,4 +115,25 @@ func compareDate(dateStart, dateEnd time.Time) {
 
 	fmt.Printf("Time to guess the number:\n")
 	fmt.Printf("%d days, %d hours, %d minutes, and %d seconds\n", days, hours, minutes, seconds)
+}
+
+// function to show hint
+func hintProvide(randomNumber, numberUser int) {
+	if numberUser < randomNumber {
+		fmt.Println("Too low!")
+	} else if numberUser > randomNumber {
+		fmt.Println("Too high!")
+	}
+
+	if abs(numberUser-randomNumber) <= 5 {
+		fmt.Println("You're close!")
+	}
+}
+
+// Función aux to calc the absolute number
+func abs(x int) int {
+	if x < 0 {
+		return -x
+	}
+	return x
 }
