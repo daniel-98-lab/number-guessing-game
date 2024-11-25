@@ -1,6 +1,6 @@
 # number-guessing-game
 
-Build a simple number guessing game to test your luck.
+Build a simple number guessing game to test your luck.  Challenge from [number-guessing-game](https://roadmap.sh/projects/number-guessing-game)
 
 ## Features
 
