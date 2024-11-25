@@ -2,7 +2,7 @@ package enums
 
 type Difficulty string
 
-// Types Difficulty
+// Types of Difficulty
 const (
 	Easy   Difficulty = "easy"
 	Medium Difficulty = "medium"

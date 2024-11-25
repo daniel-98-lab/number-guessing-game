@@ -9,7 +9,7 @@ import (
 	"github.com/daniel-98-lab/number-guessing-game/internal/enums"
 )
 
-// Difficulty Types with Chances
+// Types of Difficulty with Chances to play
 var difficultyWithChancesMap = map[enums.Difficulty]int{
 	enums.Easy:   10,
 	enums.Medium: 5,
@@ -35,9 +35,9 @@ func (s *NumberGuessingGame) Play() {
 			fmt.Printf("Congratulations you won!!!!, Number of attempts: %d\n", attempts)
 			compareDate(timeStart, timeGuessNumber)
 		} else {
-			fmt.Println("You lost, you don't luck!!")
+			fmt.Println("You lost :(!!")
 		}
-		fmt.Println("Do you want to play more: true or false")
+		fmt.Println("Do you want to play more: true or false?")
 
 		fmt.Scanln(&playAgain)
 		if !playAgain {
@@ -46,6 +46,7 @@ func (s *NumberGuessingGame) Play() {
 	}
 }
 
+// Function to obtain difficulty, if the user chooses wrong, it is repeated until the correct difficulty is obtained.
 func getDifficulty() string {
 	fmt.Println("Please select the difficulty level: ")
 	fmt.Println("Easy: 10")
@@ -55,10 +56,9 @@ func getDifficulty() string {
 	var diff string
 	for {
 
-		//Input difficulty
 		fmt.Scanln(&diff)
 
-		//Trim Spaces and To lower diff
+		// Trim Spaces and To lower diff
 		diff = strings.ToLower(strings.TrimSpace(diff))
 
 		if _, exists := difficultyWithChancesMap[enums.Difficulty(diff)]; exists {
@@ -72,6 +72,7 @@ func getRandomNumber() int {
 	return rand.Intn(100) + 1
 }
 
+// GuessGame handles the guessing logic, returning success status and attempts used.
 func guessGame(chances, randomNumber int) (bool, int) {
 	var number int
 	for i := 0; i < chances; i++ {
@@ -97,13 +98,14 @@ func guessGame(chances, randomNumber int) (bool, int) {
 }
 
 // HELPERS
+
 // function to clear input buffer
 func clearInputBuffer() {
 	var discard string
 	fmt.Scanln(&discard) // Consume the rest of the input
 }
 
-// function to compare two dates and show the difference between them
+// Function to compare two dates and show the difference between them
 func compareDate(dateStart, dateEnd time.Time) {
 	duration := dateEnd.Sub(dateStart)
 
@@ -117,7 +119,7 @@ func compareDate(dateStart, dateEnd time.Time) {
 	fmt.Printf("%d days, %d hours, %d minutes, and %d seconds\n", days, hours, minutes, seconds)
 }
 
-// function to show hint
+// HintProvide gives feedback on whether the user's guess is too low, too high, or close to the random number.
 func hintProvide(randomNumber, numberUser int) {
 	if numberUser < randomNumber {
 		fmt.Println("Too low!")
@@ -130,7 +132,7 @@ func hintProvide(randomNumber, numberUser int) {
 	}
 }
 
-// Función aux to calc the absolute number
+// Abs calculates the absolute value of an integer.
 func abs(x int) int {
 	if x < 0 {
 		return -x
